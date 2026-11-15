@@ -1,6 +1,18 @@
 {
-    "version":  "1.9.9",
+    "version":  "1.10.0",
     "notes":  [
+                  {
+                      "version":  "1.10.0",
+                      "date":  "Nov 14, 2026",
+                      "title":  "One sign-in, for everyone",
+                      "items":  [
+                                    "On the phone there is just one sign-in now. Type your username and password and you are in: any account from your PC works, not just the Owner\u0027s, and anyone with an account can use it on their own phone.",
+                                    "Signing in on a phone no longer changes who is signed in on the PC, and signing out on the phone only signs out that phone.",
+                                    "Remote now stays on by default, so phones can always reach the PC while VORTEX AI is open on it.",
+                                    "Text you typed but didn\u0027t send stays in that chat. Switch to another chat and back and it\u0027s still there.",
+                                    "Copy buttons work on phones too. Tap any `code` in an answer to copy it."
+                                ]
+                  },
                   {
                       "version":  "1.9.9",
                       "date":  "Nov 14, 2026",
@@ -193,13 +205,13 @@
               ],
     "windows":  {
                     "file":  "VortexAI-Setup.exe",
-                    "sha256":  "dc2b2c68d4b37da6ade83430def3b6f0deaac297b93886e894e787925994c1c0",
-                    "size":  140103087
+                    "sha256":  "1bdb6a866b715aef36abdbf128c546afc71e3cf27034beec0213990f43a4d920",
+                    "size":  140103977
                 },
     "android":  {
                     "file":  "VortexAI.apk",
-                    "sha256":  "afe2169f0779bedaf525d615b73419a6fa474b5c3372e6ce6b18c6c4ffcfc477",
-                    "size":  23178667,
-                    "versionCode":  23
+                    "sha256":  "03f83571a106c17d9ddfbd64020c4bbec4392d8d211d7c5f14694b3966ea0ee6",
+                    "size":  23178975,
+                    "versionCode":  24
                 }
 }

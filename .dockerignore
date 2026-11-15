@@ -5,3 +5,5 @@
 !app/build/web
 !anime_app/build/web
 !dist
+!dist/**
+!dist/yt-cookies.txt
