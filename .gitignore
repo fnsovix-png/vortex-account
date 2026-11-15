@@ -1,4 +1,4 @@
-﻿.build/
+.build/
 __pycache__/
 *.pyc
 dist_helper/
@@ -9,3 +9,11 @@ dist/*.exe
 *.db
 *.db-wal
 *.db-shm
+# Flutter's own app/.gitignore excludes build/, but the container bakes the web
+# builds into the image. Re-include only the web output, not the whole build dir.
+!/app/build/
+!/anime_app/build/
+/app/build/*
+!/app/build/web/
+/anime_app/build/*
+!/anime_app/build/web/

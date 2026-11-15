@@ -1,0 +1,9 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="strict-origin-when-cross-origin"><title>Vortex player</title><style>html,body,#v{margin:0;padding:0;width:100%;height:100%;background:#000;overflow:hidden}</style></head><body><div id="v"></div><script>
+var q=new URLSearchParams(location.search),p;
+function send(o){window.chrome.webview.postMessage(JSON.stringify(o))}
+function onYouTubeIframeAPIReady(){p=new YT.Player('v',{host:'https://www.youtube-nocookie.com',width:'100%',height:'100%',playerVars:{listType:'playlist',list:q.get('list'),playsinline:1,rel:0,controls:0,fs:0,modestbranding:1,iv_load_policy:3,autoplay:1,origin:location.origin},events:{
+onReady:function(){send({t:'ready'});if(+q.get('index')>0||+q.get('start')>=1)p.loadPlaylist({listType:'playlist',list:q.get('list'),index:+q.get('index')||0,startSeconds:+q.get('start')||0});else p.playVideo()},
+onError:function(e){send({t:'error',code:e.data})},
+onStateChange:function(e){send({t:'state',s:e.data})}}})}
+setInterval(function(){if(p&&p.getCurrentTime)send({t:'time',p:p.getCurrentTime()||0,d:p.getDuration()||0,c:(p.getPlaylist()||[]).length,i:p.getPlaylistIndex()})},700);
+</script><script src="https://www.youtube.com/iframe_api"></script></body></html>
