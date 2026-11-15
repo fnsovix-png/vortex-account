@@ -1,0 +1,40 @@
+<!doctype html><meta charset="utf-8"><meta name="referrer" content="strict-origin-when-cross-origin"><title>scan</title>
+<div id="slot"></div><pre id="log"></pre>
+<script>
+let queue = [], done = 0, total = 0;
+function run() {
+  const item = queue.shift();
+  if (!item) { document.getElementById('log').textContent = 'finished'; return; }
+  const states = [];
+  let p, settled = false, timer;
+  const finish = r => {
+    if (settled) return;
+    settled = true;
+    clearTimeout(timer);
+    let extra = {};
+    try { const d = p.getVideoData() || {}; const pl = p.getPlaylist() || []; extra = { seconds: Math.round(p.getDuration() || 0), count: pl.length, title: d.title, channel: d.author }; } catch (e) {}
+    fetch('save', { method: 'POST', body: JSON.stringify({ id: item.id, list: item.list, states, ...r, ...extra }) });
+    done++;
+    document.getElementById('log').textContent = done + ' of ' + total;
+    try { p.destroy(); } catch (e) {}
+    setTimeout(run, 200);
+  };
+  document.getElementById('slot').innerHTML = '<div id="v"></div>';
+  timer = setTimeout(() => finish({ ok: false, why: 'timeout' }), 9000);
+  p = new YT.Player('v', { width: 480, height: 270, host: 'https://www.youtube-nocookie.com',
+    playerVars: { listType: 'playlist', list: item.list, controls: 0, autoplay: 1, mute: 1, playsinline: 1, origin: location.origin },
+    events: {
+      onReady: () => { p.mute(); p.playVideo(); },
+      onError: e => finish({ ok: false, why: 'error ' + e.data }),
+      onStateChange: e => { states.push(e.data); if (e.data === 1) setTimeout(() => finish({ ok: true }), 1200); }
+    } });
+}
+function onYouTubeIframeAPIReady() { run(); }
+fetch('shows.json').then(r => r.json()).then(shows => {
+  for (const s of shows) for (const list of s.lists) queue.push({ id: s.id, list });
+  total = queue.length;
+  const tag = document.createElement('script');
+  tag.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(tag);
+});
+</script>

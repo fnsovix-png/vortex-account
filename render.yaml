@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: vortex-account
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    maxShutdownDelaySeconds: 30
+    autoDeployTrigger: commit
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: VORTEX_DATA
+        value: /data
+      - key: VORTEX_ALLOW_SIGNUP
+        value: "1"
+      # Upstash Redis keeps the account database and files across restarts,
+      # because the free plan has no persistent disk.
+      - key: VORTEX_REDIS_URL
+        sync: false

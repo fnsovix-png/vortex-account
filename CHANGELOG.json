@@ -1,0 +1,142 @@
+[
+  {
+    "version": "1.2.11",
+    "build": 3014,
+    "date": "2026-11-14",
+    "notes": [
+      "Founder crown on the profile picture, with a little shine.",
+      "Real numbers on the profile: listening time, plays and best streak."
+    ]
+  },
+  {
+    "version": "1.2.10",
+    "build": 3013,
+    "date": "2026-11-14",
+    "notes": [
+      "Switches off the old server address, so the app connects without any setup."
+    ]
+  },
+  {
+    "version": "1.2.9",
+    "build": 3012,
+    "date": "2026-11-14",
+    "notes": [
+      "Vortex now runs from your own PC, so sign-in, search, lyrics and playback work again.",
+      "Songs play while the PC is on."
+    ]
+  },
+  {
+    "version": "1.2.9",
+    "build": 3012,
+    "date": "2026-11-08",
+    "changes": [
+      "Messages now arrive instantly",
+      "Emojis in chat, with your recent ones saved. Send just an emoji and it shows big",
+      "Gift a song to a friend: it arrives wrapped, and they unwrap it into a spinning record they can play"
+    ]
+  },
+  {
+    "version": "1.2.8",
+    "build": 3011,
+    "date": "2026-11-07",
+    "changes": [
+      "Fixed the opening animation freezing at the end",
+      "The animation now finishes on a full green screen with a music quote"
+    ]
+  },
+  {
+    "version": "1.2.7",
+    "build": 3010,
+    "date": "2026-11-07",
+    "changes": [
+      "A brand new opening animation",
+      "Your status has a new look, with its own icons",
+      "Smoother background colors"
+    ]
+  },
+  {
+    "version": "1.2.6",
+    "build": 3009,
+    "date": "2026-11-06",
+    "changes": [
+      "Your song now shows when you swipe down on Android, with play, pause, next and previous",
+      "Control your music with the screen off",
+      "The new icon now fills its shape on Android",
+      "Vortex on Windows uses less of your PC"
+    ]
+  },
+  {
+    "version": "1.2.5",
+    "build": 3008,
+    "date": "2026-11-06",
+    "changes": [
+      "New Vortex icon",
+      "Asks to allow notifications on Android, so your song can show in the notification shade"
+    ]
+  },
+  {
+    "version": "1.2.4",
+    "build": 3007,
+    "date": "2026-11-06",
+    "changes": [
+      "Vortex runs much smoother and uses far less memory",
+      "Fixed songs getting stuck on loading",
+      "Open your own profile, with a bio, pronouns and a quote bubble",
+      "Set your status: Online, Sleeping, Do not disturb or Invisible",
+      "Listening streaks, with fire that changes color the longer you go",
+      "See and control your song from Windows Quick Settings and the iPhone lock screen",
+      "Fixed being signed out by accident"
+    ]
+  },
+  {
+    "version": "1.2.3",
+    "build": 6,
+    "date": "2026-11-06",
+    "changes": [
+      "Fixed signing in and creating an account",
+      "Friendlier messages if your internet drops"
+    ]
+  },
+  {
+    "version": "1.2.2",
+    "build": 5,
+    "date": "2026-11-06",
+    "changes": [
+      "Vortex now has a permanent home, so you never need an address",
+      "Clear messages when creating an account"
+    ]
+  },
+  {
+    "version": "1.2.1",
+    "build": 4,
+    "date": "2026-11-05",
+    "changes": [
+      "Music keeps playing with the screen off",
+      "Lock screen and notification controls on phones",
+      "Sign-up no longer asks for an invite code"
+    ]
+  },
+  {
+    "version": "1.2.0",
+    "build": 3,
+    "date": "2026-11-05",
+    "changes": [
+      "Playlists: name them whatever you want and pick any cover",
+      "New Shooting Stars style",
+      "Cleaner look across the whole app",
+      "Updates now arrive right inside the app"
+    ]
+  },
+  {
+    "version": "1.1.0",
+    "build": 2,
+    "date": "2026-11-05",
+    "changes": [
+      "Accounts, friends and chat",
+      "Artist and album pages",
+      "Styles, fonts and backgrounds",
+      "Space bar plays and pauses",
+      "Fixed pause restarting the song while looping"
+    ]
+  }
+]

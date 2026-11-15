@@ -1,0 +1,40 @@
+{
+    "version":  "1.0.2",
+    "notes":  [
+                  {
+                      "version":  "1.0.2",
+                      "build":  3,
+                      "date":  "2026-11-14",
+                      "notes":  [
+                                    "Works against your own PC server.",
+                                    "Sign-in, list and sync work while the PC is on."
+                                ]
+                  },
+                  {
+                      "version":  "1.0.1",
+                      "build":  2,
+                      "date":  "2026-11-07",
+                      "changes":  [
+                                      "My Library: add your own videos and watch them in the full Vortex player, with subtitles, audio and quality choices. It stays on your device."
+                                  ]
+                  },
+                  {
+                      "version":  "1.0.0",
+                      "build":  1,
+                      "date":  "2026-11-07",
+                      "changes":  [
+                                      "The first Vortex Anime."
+                                  ]
+                  }
+              ],
+    "android":  {
+                    "file":  "VortexAnime.apk",
+                    "sha256":  "ee2bc56df66564083ae7fcb734e20c9d24602d4e0bab99af204ec3b704f5ea3c",
+                    "size":  98362862
+                },
+    "windows":  {
+                    "file":  "VortexAnime-Windows.zip",
+                    "sha256":  "84c21810a88180e1e5ca5d3405e6236e89688b1c6d7d955f71895d227f9abd77",
+                    "size":  33445257
+                }
+}

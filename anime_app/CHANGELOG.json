@@ -1,0 +1,27 @@
+[
+  {
+    "version": "1.0.2",
+    "build": 3,
+    "date": "2026-11-14",
+    "notes": [
+      "Works against your own PC server.",
+      "Sign-in, list and sync work while the PC is on."
+    ]
+  },
+  {
+    "version": "1.0.1",
+    "build": 2,
+    "date": "2026-11-07",
+    "changes": [
+      "My Library: add your own videos and watch them in the full Vortex player, with subtitles, audio and quality choices. It stays on your device."
+    ]
+  },
+  {
+    "version": "1.0.0",
+    "build": 1,
+    "date": "2026-11-07",
+    "changes": [
+      "The first Vortex Anime."
+    ]
+  }
+]

@@ -1,0 +1,7 @@
+*
+!requirements.txt
+!main.py
+!durable.py
+!app/build/web
+!anime_app/build/web
+!dist

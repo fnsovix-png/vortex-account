@@ -1,0 +1,11 @@
+﻿.build/
+__pycache__/
+*.pyc
+dist_helper/
+cloudflared.exe
+dist/*.apk
+dist/*.zip
+dist/*.exe
+*.db
+*.db-wal
+*.db-shm
