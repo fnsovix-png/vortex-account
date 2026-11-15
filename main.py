@@ -137,36 +137,39 @@ class _SilentLogger:
 # bot". A browser cookie export in VORTEX_YT_COOKIES (path or raw contents)
 # gives yt-dlp a signed-in session that passes the check.
 def _cookie_file() -> str | None:
-    raw = os.environ.get("VORTEX_YT_COOKIES", "").strip()
-    # Base64 wins: it keeps the raw file intact through YAML without quoting.
+    """Finds a cookie file from the shipped copy, base64 env, or a path.
+
+    YouTube refuses a datacenter IP with "sign in to confirm you are not a
+    bot". Every candidate is validated, so a truncated env var falls through
+    to the shipped file instead of failing the whole lookup.
+    """
+    candidates: list[str] = []
     encoded = os.environ.get("VORTEX_YT_COOKIES_B64", "").strip()
     if encoded:
         try:
-            raw = base64.b64decode(encoded).decode("utf-8", "ignore")
+            candidates.append(base64.b64decode(encoded).decode("utf-8", "ignore"))
         except Exception:
             pass
-    if not raw:
-        return None
-    if not raw:
-        # A file committed to dist/ is the reliable path: env vars do not
-        # always reach a container, and this needs no dashboard fiddling.
-        shipped = DOWNLOAD_DIR / "yt-cookies.txt"
-        if shipped.is_file():
-            return str(shipped)
-        return None
-    if "Netscape" in raw or "\t" in raw:
-        path = DATA_DIR / "yt-cookies.txt"
-        if not path.exists() or path.read_text(encoding="utf-8", errors="ignore") != raw:
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(raw, encoding="utf-8")
-        return str(path)
-    return raw if Path(raw).is_file() else None
+    raw = os.environ.get("VORTEX_YT_COOKIES", "").strip()
+    if raw:
+        candidates.append(raw)
+    shipped = DOWNLOAD_DIR / "yt-cookies.txt"
+    if shipped.is_file():
+        candidates.append(shipped.read_text(encoding="utf-8", errors="ignore"))
 
+    for text in candidates:
+        if not text:
+            continue
+        if "Netscape" in text or "\t" in text:
+            path = DATA_DIR / "yt-cookies.txt"
+            if not path.exists() or path.read_text(encoding="utf-8", errors="ignore") != text:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(text, encoding="utf-8")
+            return str(path)
+        if Path(text).is_file():
+            return text
+    return None
 
-# YouTube's web client now demands a PO token / signed-in session. The inner
-# clients still hand out plain audio URLs, and yt-dlp tries them in order, so
-# this works from a datacenter IP with no cookies. Android last-but-one because
-# it is the flakiest.
 YDL_BASE = {
     "quiet": True,
     "no_warnings": True,
