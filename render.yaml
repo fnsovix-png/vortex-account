@@ -18,4 +18,4 @@ services:
       # Upstash Redis keeps the account database and files across restarts,
       # because the free plan has no persistent disk.
       - key: VORTEX_REDIS_URL
-        sync: false
+        value: rediss://default:gQAAAAAAAxhJAQIgcDE3MzIzMWZkMmUyZTM0MDYyOThmYTRiYWViMDRiZTRkOA@precise-grub-202825.upstash.io:6379
