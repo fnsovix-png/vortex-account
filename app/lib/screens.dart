@@ -67,7 +67,12 @@ class _HomeScreenState extends State<HomeScreen> {
         final tracks = await widget.c.api.search(s.$2, limit: 12);
         if (mounted) setState(() => _data[s.$1] = tracks);
       } catch (e) {
-        if (mounted) setState(() => _error = 'Couldn\'t load music. Check your internet connection.');
+        if (mounted) {
+          final s = '$e';
+          setState(() => _error = s.contains('Please sign in')
+              ? 'Sign in to load your music.'
+              : 'Couldn\'t load music. $s');
+        }
       }
     }
   }

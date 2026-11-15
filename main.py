@@ -132,7 +132,35 @@ class _SilentLogger:
         pass
 
 
-YDL_BASE = {"quiet": True, "no_warnings": True, "noplaylist": True, "logger": _SilentLogger()}
+# YouTube refuses a plain datacenter IP with "sign in to confirm you're not a
+# bot". A browser cookie export in VORTEX_YT_COOKIES (path or raw contents)
+# gives yt-dlp a signed-in session that passes the check.
+def _cookie_file() -> str | None:
+    raw = os.environ.get("VORTEX_YT_COOKIES", "").strip()
+    if not raw:
+        return None
+    if "Netscape" in raw or "\t" in raw:
+        path = DATA_DIR / "yt-cookies.txt"
+        if not path.exists() or path.read_text(encoding="utf-8", errors="ignore") != raw:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(raw, encoding="utf-8")
+        return str(path)
+    return raw if Path(raw).is_file() else None
+
+
+# YouTube's web client now demands a PO token / signed-in session. The inner
+# clients still hand out plain audio URLs, and yt-dlp tries them in order, so
+# this works from a datacenter IP with no cookies. Android last-but-one because
+# it is the flakiest.
+YDL_BASE = {
+    "quiet": True,
+    "no_warnings": True,
+    "noplaylist": True,
+    "logger": _SilentLogger(),
+    "extractor_args": {"youtube": {"player_client": ["tv_embedded", "android", "android_vr"]}},
+}
+if (cookie := _cookie_file()):
+    YDL_BASE["cookiefile"] = cookie
 
 app = FastAPI(title="Vortex Backend")
 client = httpx.AsyncClient(timeout=httpx.Timeout(20, read=None), follow_redirects=True)
@@ -292,7 +320,7 @@ def _search(q: str, limit: int):
 
 
 def _audio_info(video_id: str):
-    opts = {**YDL_BASE, "format": "bestaudio[ext=m4a]/bestaudio"}
+    opts = {**YDL_BASE, "format": "bestaudio[ext=m4a]/bestaudio/18/best"}
     with yt_dlp.YoutubeDL(opts) as ydl:
         info = ydl.extract_info(f"https://www.youtube.com/watch?v={video_id}", download=False)
     url = info["url"]
