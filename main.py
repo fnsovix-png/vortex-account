@@ -1,4 +1,5 @@
 import asyncio
+import base64
 import hashlib
 import json
 import os
@@ -137,6 +138,13 @@ class _SilentLogger:
 # gives yt-dlp a signed-in session that passes the check.
 def _cookie_file() -> str | None:
     raw = os.environ.get("VORTEX_YT_COOKIES", "").strip()
+    # Base64 wins: it keeps the raw file intact through YAML without quoting.
+    encoded = os.environ.get("VORTEX_YT_COOKIES_B64", "").strip()
+    if encoded:
+        try:
+            raw = base64.b64decode(encoded).decode("utf-8", "ignore")
+        except Exception:
+            pass
     if not raw:
         return None
     if "Netscape" in raw or "\t" in raw:
