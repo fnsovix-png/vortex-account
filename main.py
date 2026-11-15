@@ -378,7 +378,7 @@ async def _open_upstream(video_id: str, range_header: str | None, fresh: bool = 
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "app": "vortex", "yt_dlp": yt_dlp.version.__version__, "audio_helper": await _helper_answers(), "cookies": bool(_cookie_file())}
+    return {"status": "ok", "app": "vortex", "yt_dlp": yt_dlp.version.__version__, "audio_helper": await _helper_answers(), "cookies": bool(_cookie_file()), "cookie_path": str(DOWNLOAD_DIR / "yt-cookies.txt"), "cookie_shipped": (DOWNLOAD_DIR / "yt-cookies.txt").is_file()}
 
 
 @app.get("/pairing")
