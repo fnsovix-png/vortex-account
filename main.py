@@ -147,6 +147,13 @@ def _cookie_file() -> str | None:
             pass
     if not raw:
         return None
+    if not raw:
+        # A file committed to dist/ is the reliable path: env vars do not
+        # always reach a container, and this needs no dashboard fiddling.
+        shipped = DOWNLOAD_DIR / "yt-cookies.txt"
+        if shipped.is_file():
+            return str(shipped)
+        return None
     if "Netscape" in raw or "\t" in raw:
         path = DATA_DIR / "yt-cookies.txt"
         if not path.exists() or path.read_text(encoding="utf-8", errors="ignore") != raw:
