@@ -177,7 +177,9 @@ YDL_BASE = {
     "logger": _SilentLogger(),
     "extractor_args": {"youtube": {"player_client": ["tv_embedded", "android", "android_vr"]}},
 }
-if (cookie := _cookie_file()):
+# The cookie file is kept for diagnostics only: passing it makes YouTube answer
+# with storyboards only, while anonymous requests still return real audio.
+if False and (cookie := _cookie_file()):
     YDL_BASE["cookiefile"] = cookie
 
 app = FastAPI(title="Vortex Backend")
