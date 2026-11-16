@@ -1,6 +1,26 @@
 {
-  "version": "1.2.6",
+  "version": "1.2.7",
   "notes": [
+    {
+      "version": "1.2.7",
+      "date": "2026-11-16",
+      "changes": [
+        "Updates now arrive inside the app: no more files to sideload.",
+        "Fixed the source icon for HentaiHaven.",
+        "Sharper errors when a server is waking up, instead of blaming Wi-Fi."
+      ]
+    },
+    {
+      "version": "1.2.7",
+      "date": "2026-11-16",
+      "changes": [
+        "Countdowns to new episodes. Home has a Next episodes row for the shows you watch and save, with a live timer to each one's next episode.",
+        "If a show you watched has finished but a new season is airing (like Black Clover Season 2), it counts down to the new season.",
+        "Every airing show's page shows when the next episode comes out, ticking down in days, hours, minutes and seconds.",
+        "New Schedule page: the whole week of new episodes, day by day, with a My shows filter.",
+        "Fixed strange symbols in a few labels, like “What’s new”."
+      ]
+    },
     {
       "version": "1.2.6",
       "date": "2026-11-15",
@@ -10,32 +30,11 @@
         "The app finds a working server by itself if one ever goes down.",
         "New source: HentaiHaven (18+), with its own icon and English subtitles."
       ]
-    },
-    {
-      "version": "1.2.5",
-      "date": "2026-11-15",
-      "changes": [
-        "Changed how the app talks to the server, so a cold server no longer looks offline."
-      ]
-    },
-    {
-      "version": "1.2.4",
-      "date": "2026-11-14",
-      "changes": [
-        "Moved off Fly.io to a free host, so the server stays up while your PC is off.",
-        "The app finds the server again by itself if its address ever changes.",
-        "Health check works without the API token, for uptime pings."
-      ]
     }
   ],
   "android": {
     "file": "VortexAnimeApp.apk",
-    "sha256": "9f0ee0fbc1236c658a93b262729bbce9bae9e2d8b2c2af91032604e66a6c8ba2",
-    "size": 61717262
-  },
-  "windows": {
-    "file": "VortexAnimeApp-Windows.zip",
-    "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
-    "size": 0
+    "sha256": "ad50abfcdc6c2521ee10967a93bc11b79f9c6317b85d44c67f629ccaddca1c36",
+    "size": 61947226
   }
 }
