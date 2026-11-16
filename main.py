@@ -338,7 +338,7 @@ def _search(q: str, limit: int):
 
 
 def _audio_info(video_id: str):
-    opts = {**YDL_BASE, "format": "bestaudio[ext=m4a]/bestaudio/18/best"}
+    opts = {**YDL_BASE, "format": "bestaudio[ext=m4a]/bestaudio/best[acodec!=none]/18/best"}
     with yt_dlp.YoutubeDL(opts) as ydl:
         info = ydl.extract_info(f"https://www.youtube.com/watch?v={video_id}", download=False)
     url = info["url"]
