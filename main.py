@@ -177,9 +177,7 @@ YDL_BASE = {
     "logger": _SilentLogger(),
     "extractor_args": {"youtube": {"player_client": ["tv_embedded", "android", "android_vr"]}},
 }
-# The cookie file is kept for diagnostics only: passing it makes YouTube answer
-# with storyboards only, while anonymous requests still return real audio.
-if False and (cookie := _cookie_file()):
+if (cookie := _cookie_file()):
     YDL_BASE["cookiefile"] = cookie
 
 app = FastAPI(title="Vortex Backend")
@@ -1792,13 +1790,15 @@ async def stream(video_id: str, request: Request):
 
 
 @app.get("/ytdebug")
-async def ytdebug(id: str, client: str = ""):
-    """Reports what the host can actually extract, formats included."""
+async def ytdebug(id: str, client: str = "", cookies: int = 1):
+    """Reports what the host can extract with or without cookies."""
     def run():
         opts = {**YDL_BASE}
+        if not cookies:
+            opts.pop("cookiefile", None)
         if client:
             opts["extractor_args"] = {"youtube": {"player_client": client.split(",")}}
-        uses_cookies = bool(opts.get("cookiefile"))
+        used = bool(opts.get("cookiefile"))
         with yt_dlp.YoutubeDL({**opts, "format": None}) as ydl:
             info = ydl.extract_info(f"https://www.youtube.com/watch?v={id}", download=False)
         formats = [
@@ -1806,11 +1806,11 @@ async def ytdebug(id: str, client: str = ""):
             for f in (info.get("formats") or [])
             if f.get("acodec") not in (None, "none")
         ]
-        return {"ok": True, "cookies": uses_cookies, "n": len(formats), "formats": formats[:10]}
+        return {"ok": True, "cookies": used, "n": len(formats), "formats": formats[:8]}
     try:
         return await asyncio.to_thread(run)
     except Exception as exc:
-        return {"ok": False, "client": client, "cookies": bool(YDL_BASE.get("cookiefile")), "error": str(exc)[:150]}
+        return {"ok": False, "client": client, "cookies": bool(cookies), "error": str(exc)[:120]}
 
 @app.get("/storage")
 async def storage_status():
