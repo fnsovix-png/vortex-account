@@ -1,4 +1,4 @@
 fastapi
 uvicorn
 httpx
-yt-dlp==2026.11.15.232800
+yt-dlp==2026.11.15.232800.dev0
