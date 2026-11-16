@@ -338,14 +338,33 @@ def _search(q: str, limit: int):
 
 
 def _audio_info(video_id: str):
-    opts = {**YDL_BASE, "format": "bestaudio[ext=m4a]/bestaudio/best[acodec!=none]/18/best"}
-    with yt_dlp.YoutubeDL(opts) as ydl:
-        info = ydl.extract_info(f"https://www.youtube.com/watch?v={video_id}", download=False)
-    url = info["url"]
-    expire = parse_qs(urlparse(url).query).get("expire", [None])[0]
-    expires_at = int(expire) - URL_SAFETY_MARGIN if expire else time.time() + URL_FALLBACK_TTL
-    return url, info.get("http_headers", {}), info.get("ext", "m4a"), expires_at
+    """Resolve a playable audio URL.
 
+    Cookies get past YouTube's datacenter bot check but suppress the audio
+    formats, so both contexts are tried and whichever yields a stream wins.
+    """
+    base = {**YDL_BASE, "format": "bestaudio[ext=m4a]/bestaudio/best[acodec!=none]/best/18"}
+    attempts = []
+    if base.get("cookiefile"):
+        attempts.append({k: v for k, v in base.items() if k != "cookiefile"})
+        attempts.append(base)
+    else:
+        attempts.append(base)
+
+    last: Exception | None = None
+    for opts in attempts:
+        try:
+            with yt_dlp.YoutubeDL(opts) as ydl:
+                info = ydl.extract_info(f"https://www.youtube.com/watch?v={video_id}", download=False)
+            url = info.get("url")
+            if not url:
+                continue
+            expire = parse_qs(urlparse(url).query).get("expire", [None])[0]
+            expires_at = int(expire) - URL_SAFETY_MARGIN if expire else time.time() + URL_FALLBACK_TTL
+            return url, info.get("http_headers", {}), info.get("ext", "m4a"), expires_at
+        except Exception as exc:
+            last = exc
+    raise last if last else RuntimeError("no stream")
 
 async def _resolve(video_id: str, fresh: bool = False):
     cached = _url_cache.get(video_id)
