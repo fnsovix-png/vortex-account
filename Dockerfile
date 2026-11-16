@@ -2,6 +2,8 @@ FROM python:3.12-slim
 WORKDIR /srv
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
+# Nightly yt-dlp: YouTube's extractor breaks weekly and stable lags behind.
+RUN pip install --no-cache-dir --pre -U yt-dlp
 # Copy the whole (allowlisted) context so a missing asset folder can never
 # fail the build, unlike one COPY per directory.
 COPY . .
