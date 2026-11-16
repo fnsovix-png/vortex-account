@@ -1771,20 +1771,24 @@ async def stream(video_id: str, request: Request):
 
 @app.get("/ytdebug")
 async def ytdebug(id: str, client: str = ""):
-    """Tries one inner client and reports the real yt-dlp outcome."""
+    """Reports what the host can actually extract, formats included."""
     def run():
         opts = {**YDL_BASE}
         if client:
             opts["extractor_args"] = {"youtube": {"player_client": client.split(",")}}
-        opts["format"] = "bestaudio[ext=m4a]/bestaudio/18/best"
-        with yt_dlp.YoutubeDL(opts) as ydl:
+        uses_cookies = bool(opts.get("cookiefile"))
+        with yt_dlp.YoutubeDL({**opts, "format": None}) as ydl:
             info = ydl.extract_info(f"https://www.youtube.com/watch?v={id}", download=False)
-        return {"ok": True, "ext": info.get("ext"), "url": (info.get("url") or "")[:60]}
+        formats = [
+            f"{f.get('format_id')}|{f.get('ext')}|{f.get('acodec')}"
+            for f in (info.get("formats") or [])
+            if f.get("acodec") not in (None, "none")
+        ]
+        return {"ok": True, "cookies": uses_cookies, "n": len(formats), "formats": formats[:10]}
     try:
         return await asyncio.to_thread(run)
     except Exception as exc:
-        return {"ok": False, "client": client, "error": str(exc)[:200]}
-
+        return {"ok": False, "client": client, "cookies": bool(YDL_BASE.get("cookiefile")), "error": str(exc)[:150]}
 
 @app.get("/storage")
 async def storage_status():
