@@ -215,6 +215,7 @@ import durable  # noqa: E402
 _store = durable.Store(DATA_DIR)
 RESTORE_STATUS = _store.restore()
 print(f"[storage] {RESTORE_STATUS}", flush=True)
+print(f"[yt-dlp] {yt_dlp.version.__version__} cookies={bool(_cookie_file())}", flush=True)
 
 _db = sqlite3.connect(DB_FILE, check_same_thread=False)
 _db.row_factory = sqlite3.Row
