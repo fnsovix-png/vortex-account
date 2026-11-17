@@ -1,6 +1,14 @@
 {
-  "version": "1.2.8",
+  "version": "1.2.9",
   "notes": [
+    {
+      "version": "1.2.9",
+      "date": "2026-11-16",
+      "changes": [
+        "Fixed silent playback on sources that keep audio in a separate track.",
+        "Covers now show save and play buttons when you hover them, without opening the show."
+      ]
+    },
     {
       "version": "1.2.8",
       "date": "2026-11-16",
@@ -17,22 +25,11 @@
         "Fixed the source icon for HentaiHaven.",
         "Sharper errors when a server is waking up, instead of blaming Wi-Fi."
       ]
-    },
-    {
-      "version": "1.2.7",
-      "date": "2026-11-16",
-      "changes": [
-        "Countdowns to new episodes. Home has a Next episodes row for the shows you watch and save, with a live timer to each one's next episode.",
-        "If a show you watched has finished but a new season is airing (like Black Clover Season 2), it counts down to the new season.",
-        "Every airing show's page shows when the next episode comes out, ticking down in days, hours, minutes and seconds.",
-        "New Schedule page: the whole week of new episodes, day by day, with a My shows filter.",
-        "Fixed strange symbols in a few labels, like “What’s new”."
-      ]
     }
   ],
   "android": {
     "file": "VortexAnimeApp.apk",
-    "sha256": "2377e064d1317e1c2e7edc93ab143f1766e4cea6170468d9d2c07d837c7cf437",
-    "size": 61980286
+    "sha256": "37ca63dc683312bc3ef80646e2bd405b5d4f4b0fc3f1ee6d209a21a384330e58",
+    "size": 61980390
   }
 }
