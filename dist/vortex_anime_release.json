@@ -1,6 +1,14 @@
 {
-  "version": "1.2.7",
+  "version": "1.2.8",
   "notes": [
+    {
+      "version": "1.2.8",
+      "date": "2026-11-16",
+      "changes": [
+        "New founder crown: drawn by hand in gold with gems, worn tilted on the side of the profile picture.",
+        "It drops on with a bounce, then floats, sways and catches the light."
+      ]
+    },
     {
       "version": "1.2.7",
       "date": "2026-11-16",
@@ -20,21 +28,11 @@
         "New Schedule page: the whole week of new episodes, day by day, with a My shows filter.",
         "Fixed strange symbols in a few labels, like “What’s new”."
       ]
-    },
-    {
-      "version": "1.2.6",
-      "date": "2026-11-15",
-      "changes": [
-        "Sign-in works again: accounts now run on a hosted server that keeps your data across restarts.",
-        "Nothing needs your PC to stay on any more.",
-        "The app finds a working server by itself if one ever goes down.",
-        "New source: HentaiHaven (18+), with its own icon and English subtitles."
-      ]
     }
   ],
   "android": {
     "file": "VortexAnimeApp.apk",
-    "sha256": "ad50abfcdc6c2521ee10967a93bc11b79f9c6317b85d44c67f629ccaddca1c36",
-    "size": 61947226
+    "sha256": "2377e064d1317e1c2e7edc93ab143f1766e4cea6170468d9d2c07d837c7cf437",
+    "size": 61980286
   }
 }
