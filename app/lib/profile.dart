@@ -1,3 +1,4 @@
+import 'crown.dart';
 import 'package:desktop_drop/desktop_drop.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
@@ -108,12 +109,7 @@ class ProfileAvatar extends StatelessWidget {
                 : Text(name.isEmpty ? '?' : name.characters.first.toUpperCase(), style: TextStyle(fontSize: size * 0.42, fontWeight: FontWeight.w900)),
           ),
         ),
-        if (c.profile?.crown == true)
-          Positioned(
-            top: -size * 0.22,
-            right: -size * 0.06,
-            child: const CrownBadge(),
-          ),
+        if (c.profile?.crown == true) CrownOnAvatar(avatarSize: size),
         if (showStatus && c.profile != null)
           Positioned(right: -1, bottom: -1, child: StatusDot(status: c.profile!.status, size: size * 0.34)),
       ],
@@ -572,54 +568,6 @@ class TopArtistsRow extends StatelessWidget {
           );
         },
       ),
-    );
-  }
-}
-
-
-/// Gold crown for the founder: floats, glows and swings a little, forever.
-class CrownBadge extends StatefulWidget {
-  final double size;
-  const CrownBadge({super.key, this.size = 34});
-  @override
-  State<CrownBadge> createState() => _CrownBadgeState();
-}
-
-class _CrownBadgeState extends State<CrownBadge> with SingleTickerProviderStateMixin {
-  late final AnimationController _c = AnimationController(vsync: this, duration: const Duration(milliseconds: 2200))..repeat(reverse: true);
-
-  @override
-  void dispose() { _c.dispose(); super.dispose(); }
-
-  @override
-  Widget build(BuildContext context) {
-    final s = widget.size;
-    return AnimatedBuilder(
-      animation: _c,
-      builder: (context, child) {
-        final t = Curves.easeInOut.transform(_c.value);
-        return Transform.translate(
-          offset: Offset(0, -2.5 * t),
-          child: Transform.rotate(
-            angle: 0.10 * (t - 0.5),
-            child: Stack(alignment: Alignment.center, children: [
-              Container(
-                width: s * 1.15, height: s * 1.15,
-                decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
-                  BoxShadow(color: const Color(0xFFFFD35C).withValues(alpha: 0.35 + 0.3 * t), blurRadius: 12 + 10 * t, spreadRadius: 1),
-                ]),
-              ),
-              ShaderMask(
-                shaderCallback: (r) => LinearGradient(colors: [
-                  Color.lerp(const Color(0xFFFFE082), const Color(0xFFFFF8D6), t)!,
-                  Color.lerp(const Color(0xFFFFB300), const Color(0xFFFFD54F), t)!,
-                ], begin: Alignment.topLeft, end: Alignment.bottomRight).createShader(r),
-                child: Text('👑', style: TextStyle(fontSize: s, height: 1)),
-              ),
-            ]),
-          ),
-        );
-      },
     );
   }
 }

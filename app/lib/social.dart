@@ -1,3 +1,4 @@
+import 'crown.dart';
 import 'dart:async';
 import 'dart:math';
 import 'dart:ui' as ui;
@@ -306,6 +307,7 @@ class PersonAvatar extends StatelessWidget {
               ? Image.network(c.api.personImageUrl(person.id, 'avatar', version), width: size, height: size, fit: BoxFit.cover, cacheHeight: (size * MediaQuery.devicePixelRatioOf(context)).ceil())
               : Text(person.username.characters.first.toUpperCase(), style: TextStyle(fontSize: size * 0.42, fontWeight: FontWeight.w900)),
         ),
+        if (person.crown) CrownOnAvatar(avatarSize: size),
         if (person.online || person.status == 'dnd' || person.status == 'sleep')
           Positioned(
             right: 0,

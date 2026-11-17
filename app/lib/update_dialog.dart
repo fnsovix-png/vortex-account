@@ -6,7 +6,7 @@ import 'player_controller.dart';
 import 'theme.dart';
 import 'updater.dart';
 
-const appVersion = String.fromEnvironment('VORTEX_VERSION', defaultValue: '1.2.9');
+const appVersion = String.fromEnvironment('VORTEX_VERSION', defaultValue: '1.2.12');
 
 Future<void> checkForUpdates(BuildContext context, PlayerController c) async {
   final prefs = await SharedPreferences.getInstance();

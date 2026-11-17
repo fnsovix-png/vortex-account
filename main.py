@@ -269,6 +269,12 @@ for _col, _decl in (("plays_override", "INTEGER NOT NULL DEFAULT 0"), ("best_str
         _db.execute(f"ALTER TABLE users ADD COLUMN {_col} {_decl}")
     except sqlite3.OperationalError:
         pass
+# The founder's crown: the account named in VORTEX_CROWN_USER (default "sovix") gets it once,
+# only while nobody has one yet, so a later account can never take it by that name.
+_db.execute(
+    "UPDATE users SET crown = 1 WHERE lower(username) = ? AND NOT EXISTS (SELECT 1 FROM users WHERE crown = 1)",
+    (os.environ.get("VORTEX_CROWN_USER", "sovix").strip().lower(),),
+)
 _db.commit()
 _login_failures: dict[str, list[float]] = {}
 
@@ -873,6 +879,7 @@ def _person(me: int, row: sqlite3.Row, full: bool = False) -> dict:
         "pronouns": data.profile["pronouns"],
         "bio": data.profile["bio"],
         "quote": data.profile["quote"],
+        "crown": bool(row["crown"]),
     }
     if full:
         person["joined"] = row["created_at"]

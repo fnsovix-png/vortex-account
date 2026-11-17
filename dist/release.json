@@ -1,6 +1,16 @@
 {
-    "version":  "1.2.11",
+    "version":  "1.2.12",
     "notes":  [
+                  {
+                      "version":  "1.2.12",
+                      "build":  3015,
+                      "date":  "2026-11-16",
+                      "notes":  [
+                                    "New founder crown: drawn by hand in gold with gems, worn tilted on the side of the profile picture.",
+                                    "It drops on with a bounce, then floats, sways and catches the light.",
+                                    "Friends now see the crown on the founder\u0027s profile too."
+                                ]
+                  },
                   {
                       "version":  "1.2.11",
                       "build":  3014,
@@ -144,12 +154,12 @@
               ],
     "android":  {
                     "file":  "Vortex.apk",
-                    "sha256":  "160a7fc8d6debd430eb7cc2a4b6ee5554097fbd6e79193a5b2b4a5eac82060a4",
-                    "size":  59882421
+                    "sha256":  "62110dd93cce162890d8bd144e0798185c00970ef14144a8d55637cef1ed1746",
+                    "size":  59898805
                 },
     "windows":  {
                     "file":  "Vortex-Windows.zip",
-                    "sha256":  "b0fcb76ff5a87e81bbcd4f7f601b3237444d7b2b485a5446cc58d2df236ec9a9",
-                    "size":  76716789
+                    "sha256":  "a27265ef7cf824c5a3b91815a5073f3829e04c1bc11295ac541cafdae37b8242",
+                    "size":  77151915
                 }
 }

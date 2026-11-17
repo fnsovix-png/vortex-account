@@ -240,6 +240,7 @@ class Person {
   final int joined;
   final int streak;
   final int bestStreak;
+  final bool crown;
 
   const Person({
     required this.id,
@@ -260,6 +261,7 @@ class Person {
     this.joined = 0,
     this.streak = 0,
     this.bestStreak = 0,
+    this.crown = false,
   });
 
   factory Person.fromJson(Map<String, dynamic> j) => Person(
@@ -281,6 +283,7 @@ class Person {
         joined: (j['joined'] as num?)?.toInt() ?? 0,
         streak: (j['streak'] as num?)?.toInt() ?? 0,
         bestStreak: (j['best_streak'] as num?)?.toInt() ?? 0,
+        crown: j['crown'] == true,
       );
 }
 
